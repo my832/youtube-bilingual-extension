@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+*.key
+*.pem
+secrets*.json
+credentials*.json
+settings.local.json
+*.zip
+.DS_Store

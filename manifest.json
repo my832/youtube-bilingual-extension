@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "youtube双语插件",
+  "version": "1.2.0",
+  "minimum_chrome_version": "111",
+  "description": "YouTube 原文与译文上下双行字幕，支持微软、谷歌、DeepSeek、MiMo 和自定义 AI。",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://api.cognitive.microsofttranslator.com/*",
+    "https://translation.googleapis.com/*",
+    "https://api.deepseek.com/*",
+    "https://api.xiaomimimo.com/*",
+    "https://api.dictionaryapi.dev/*"
+  ],
+  "optional_host_permissions": [
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "youtube双语插件"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "subtitle-core.js",
+        "subtitle-bridge.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "subtitle-core.js",
+        "dictionary-ui.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
